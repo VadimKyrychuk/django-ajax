@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>ajax</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+</head>
+<body>
+
+        <form>
+           {% csrf_token %}
+        {{form.as_p}}
+        <button>Отправить</button>
+        </form>
+
+<div class="container">
+    <div class="row" id="task-row">
+        {% for i in task_li %}
+        <div class="col-md-3">
+            <div class="card" style="border:1px solid black">
+                <form class="del-info">
+                    <input type="hidden" value="{{i.id}}" id="id-id">
+                    <button> Удалить </button>
+                </form>
+                <h4>{{i.task_name}}</h4>
+                <div class="form-check">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="flexCheckDefault"
+                                {% if i.task_check %} checked {% endif %}
+                        >
+                        <label class="form-check-label" for="flexCheckDefault">Completed:</label>
+                    </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+</div>
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>
+
+
